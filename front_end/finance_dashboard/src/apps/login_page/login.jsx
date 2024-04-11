@@ -1,14 +1,15 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 import {config} from "../../config.js";
-import { useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+
 
 export default function Login() {
-    // まず、外部スタイルシートを読み込む
-    
+
     // ユーザー名とパスワードを収集し、バックエンドに送信する
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [action, setRegister] = useState("login"); // false: ログイン、true: 登録
     const [logError, setLogError] = useState(false);
 
     const navigate = useNavigate();
@@ -16,8 +17,9 @@ export default function Login() {
     const handleSubmit =  (event) => {
         event.preventDefault();
 
-        const loginUrl = config.endPoint + "/login";
-        fetch(loginUrl, {
+        const url = config.endPoint + `/${action}`;
+        
+        fetch(url, {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -31,11 +33,16 @@ export default function Login() {
                 return Response.json();
             } else {
                 setLogError(true);  
-                throw new Error("Failed to login."+res.status);
+                throw new Error(`Failed to ${action}`+res.status);
             }
         }).then((data) => {
-            localStorage.setItem("token", data.token);
-            navigate("/dashboard");
+            if (action === "login") {
+                localStorage.setItem("token", data.token);
+                navigate("/dashboard");
+            } else {
+                alert("Registration Successful. Please login to continue.");
+                setRegister("login");
+            }
         }).catch((error) => {
             console.error(error);
         })
@@ -47,7 +54,12 @@ export default function Login() {
 
         <div className="body">
             <div className="container">
-                <h1>Login to your account 😊</h1>
+                { action === "register" &&
+                <span className="material-symbols-outlined" onClick={() => setRegister("login")}>
+                    arrow_back_ios
+                </span>
+                }
+                <h1>{action === "login" ? "Login to your account 😊" : "Register your account 😊"}</h1>
 
                 <div className="divider">
                     <div className="line"></div>
@@ -67,11 +79,12 @@ export default function Login() {
                         <i className="bx bx-lock-alt"></i>
                     </div>
 
-                    <button className="submit" onClick={handleSubmit}>Login</button>
+                    <button className="submit" onClick={handleSubmit}>{action === "login" ? "Login" : "Register"}</button>
 
                     <div className="links">
-                        <a href="#">Reset Password</a>
-                        <a href="#">Don't have an account?</a>
+                        <p>{ action === "login" ? "Don't have an account?" : "Already have an account?" } </p>
+                        { action === "login" && <p className="link" onClick={() => setRegister("register")}>Register account</p>}
+                        { action === "register" && <p className="link" onClick={() => setRegister("login")}>login account</p>}
                     </div>
                 </div>
             </div>
