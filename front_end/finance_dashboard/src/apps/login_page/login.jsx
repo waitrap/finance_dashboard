@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 import {config} from "../../config.js";
@@ -6,13 +6,31 @@ import {config} from "../../config.js";
 
 export default function Login() {
 
+    const navigate = useNavigate();
+    // ログインする前に、token検査を行う、tokenがあれば、直接dashboardに入る
+    useEffect(() => {
+        const token = localStorage.getItem('x-access-token');
+        if (token) {
+           
+            fetch(config.endPoint + config.checkLoginUrl, {
+                method:"POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': localStorage.getItem('x-access-token'),
+                },
+            }).then((res) => {
+                if (res.ok) {
+                    navigate("/dashboard");
+                }
+            });
+        }
+    }, []);
+
     // ユーザー名とパスワードを収集し、バックエンドに送信する
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [action, setRegister] = useState("login"); // false: ログイン、true: 登録
+    const [action, setRegister] = useState("login"); // login: ログイン、register: 登録
     const [logError, setLogError] = useState(false);
-
-    const navigate = useNavigate();
 
     const handleSubmit =  (event) => {
         event.preventDefault();
@@ -30,14 +48,14 @@ export default function Login() {
             }),
         }).then((res) => {
             if (res.ok) {
-                return Response.json();
+                return res.json();
             } else {
                 setLogError(true);  
                 throw new Error(`Failed to ${action}`+res.status);
             }
         }).then((data) => {
             if (action === "login") {
-                localStorage.setItem("token", data.token);
+                localStorage.setItem("x-access-token", data.token);
                 navigate("/dashboard");
             } else {
                 alert("Registration Successful. Please login to continue.");
@@ -54,11 +72,6 @@ export default function Login() {
 
         <div className="body">
             <div className="container">
-                { action === "register" &&
-                <span className="material-symbols-outlined" onClick={() => setRegister("login")}>
-                    arrow_back_ios
-                </span>
-                }
                 <h1>{action === "login" ? "Login to your account 😊" : "Register your account 😊"}</h1>
 
                 <div className="divider">
