@@ -27,7 +27,7 @@ def generate_token(guid,username):
 
 # ログイン
 @router.post("/login",tags=["login/register"])
-async def login(login_body: schemas.LoginBody, response: Response, db: SessionLocal = Depends(get_db)):
+async def login(login_body: schemas.LoginBody, response: Response, db: SessionLocal = Depends(get_db)): # type: ignore
 
     username = login_body.username
     password = login_body.password
@@ -47,3 +47,19 @@ async def login(login_body: schemas.LoginBody, response: Response, db: SessionLo
 @router.post("/logined",tags=["login/register"])
 async def logined():
     return {"message": "ログイン済み"}
+
+@router.post("/register",tags=["login/register"])
+async def register(register_body: schemas.RegisterBody, response: Response, db: SessionLocal = Depends(get_db)): # type: ignore
+    
+    username = register_body.username
+    password = register_body.password
+
+    # ユーザーの存在を確認
+    user = crud.get_user(db, username)
+    if user is not None:
+        response.status_code = 409
+        return {"message": "ユーザーが存在します"}
+    # ユーザーを新規登録する
+    crud.create_user(db, username, password)
+    return {"message": "登録しました", "username": username}
+    

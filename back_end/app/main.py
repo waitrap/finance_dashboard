@@ -8,7 +8,7 @@ from .routers import login
 
 app = FastAPI()
 
-skip_check = ["openapi.json", "login","docs","livereload"]
+skip_check = ["openapi.json", "login","register","docs","livereload"]
 @app.middleware("http")
 async def jwt_token_verify(request: Request,call_next):
     if any(skip_word in request.url.path for skip_word in skip_check):

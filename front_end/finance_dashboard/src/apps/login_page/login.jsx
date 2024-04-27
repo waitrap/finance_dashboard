@@ -7,7 +7,7 @@ import {config} from "../../config.js";
 export default function Login() {
 
     const navigate = useNavigate();
-    // ログインする前に、token検査を行う、tokenがあれば、直接dashboardに入る
+    //ログインする前に、token検査を行う、tokenがあれば、直接dashboardに入る
     useEffect(() => {
         const token = localStorage.getItem('x-access-token');
         if (token) {
@@ -50,7 +50,13 @@ export default function Login() {
             if (res.ok) {
                 return res.json();
             } else {
-                setLogError(true);  
+                if (action === "login") {
+                    setLogError(true);
+                } else if(action === "register") {
+                    if (res.status === 409) {
+                        alert("Username already exists. Please try another one.");
+                    }
+                }
                 throw new Error(`Failed to ${action}`+res.status);
             }
         }).then((data) => {
