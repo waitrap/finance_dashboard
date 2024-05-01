@@ -11,7 +11,6 @@ export default function Login() {
     useEffect(() => {
         const token = localStorage.getItem('x-access-token');
         if (token) {
-           
             fetch(config.endPoint + config.checkLoginUrl, {
                 method:"POST",
                 headers: {
@@ -61,7 +60,7 @@ export default function Login() {
             }
         }).then((data) => {
             if (action === "login") {
-                localStorage.setItem("x-access-token", data.token);
+                localStorage.setItem("x-access-token", data['x-access-token']);
                 navigate("/dashboard");
             } else {
                 alert("Registration Successful. Please login to continue.");

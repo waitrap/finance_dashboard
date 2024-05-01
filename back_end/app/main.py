@@ -5,6 +5,9 @@ import jwt
 
 from . import auth
 from .routers import login
+from .routers import balance
+from .routers import outcome
+from .routers import income
 
 app = FastAPI()
 
@@ -37,3 +40,6 @@ app.add_middleware(
 )
 
 app.include_router(login.router)
+app.include_router(balance.router)
+app.include_router(outcome.router)
+app.include_router(income.router)

@@ -1,0 +1,174 @@
+.dashboard_main {
+    display: grid;
+    grid-template-columns: 5fr 3fr;
+    gap: 1rem;
+    height: 100vh;
+}
+.main-info{
+    margin-top: 1.5rem;
+}
+
+.dashboard_main .analyse{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.analyse img{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.analyse > div{
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    background-color: #fff;
+    padding: 1.8rem;
+    border-radius: 2rem;
+    margin-top: 1rem;
+    box-shadow: 0 2rem 2rem rgba(132, 139, 200, 0.18);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.analyse > div h2{
+    white-space: nowrap;
+}
+
+.analyse > div:hover{
+    box-shadow: none;
+}
+
+.analyse .income_rate{
+    color: #1B9C85;
+    padding: 0.2rem;
+    background-color: aquamarine;
+    border-radius: 10px
+}
+
+.analyse .balance_rate{
+    color: #1B9C85;
+    padding: 0.2rem;
+    background-color: aquamarine;
+    border-radius: 10px
+}
+
+.analyse .outcome_rate{
+    color: rgb(164, 8, 8);
+    padding: 0.2rem;
+    background-color: lightcoral;
+    border-radius: 10px
+}
+
+.chart {
+    height: 40vh;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+.chart_title{
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.chart_title h2{
+    flex: 60%
+}
+.chart_title .legend{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 20%
+}
+
+.recent-transactions h2{
+    margin-bottom: 1rem;
+}
+
+.recent-transactions table{
+    background-color: var(--color-white);
+    width: 100%;
+    text-align: center;
+    border-radius: 0.5rem;
+}
+
+.recent-transactions table thead th{
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    font-weight: 600;
+    padding: 0.5rem;
+    
+}
+.recent-transactions table td{
+    height: 2.5rem;
+    border-bottom: 1px solid var(--color-light);
+    color: rgb(23, 33, 171)
+}
+
+.recent-transactions table tr:last-child td{
+    border: none;
+}
+
+.recent-transactions .table-more{
+    text-align: center;
+    margin-top: 1rem;
+    display: block
+}
+
+.right_section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-left: 0.8rem;
+    margin-right: 1rem;
+}
+/* クレジットカード部分 */
+
+.credit-card-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.credit-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 240px;
+    background: linear-gradient(135deg, #9335bb, #6236c9);
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    color: #fff;
+    padding: 2rem;
+
+}
+
+.credit-card img{
+    width: 4rem;
+    height: 2.5rem;
+}
+
+.credit-card-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.credit-card-header h2{
+    margin-top: 0.5rem;
+    font-size: 2rem;
+}
+
+.credit-card-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
+
+/* 饼状图部分 */
+.pie-chart-container{
+    height: 50vh;
+}
+
+
