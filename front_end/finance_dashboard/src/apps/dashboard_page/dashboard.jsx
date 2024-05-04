@@ -1,5 +1,6 @@
 import "./dashboard.css";
 import MainInfo from "./maininfo.jsx";
+import ChartInfo from "./chartinfo.jsx";
 
 export default function Dashboard() {
 
@@ -7,8 +8,8 @@ export default function Dashboard() {
         <div className="dashboard_main">
             <div className="middle_section">
                 <MainInfo/>
-                {/* <ChartInfo/>
-                <TableInfo/> */}
+                <ChartInfo/>
+                {/* <TableInfo/> */} 
             </div>
             {/* <div className="right_section">
                 <CreditCard/>
