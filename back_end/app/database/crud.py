@@ -4,7 +4,7 @@ import uuid
 from ..models import models
 
 
-# データベースからユーザーを
+# データベースからユーザーを取得する
 def get_user(db: Session, username: str):
     return db.query(models.User).filter(models.User.username == username).first()
 
@@ -16,6 +16,8 @@ def create_user(db: Session, user:str, password:str):
     db.commit()
     db.refresh(db_user)
     return db_user
+
+###########################################
 
 def get_day_income(db: Session, year:int, month:int, day:int, username:str):
     day_list = db.query(models.Income).filter(models.Income.year == year, models.Income.month == month, models.Income.day == day, models.Income.user == username).all()
@@ -30,6 +32,12 @@ def get_month_income(db: Session, year: int, month: int,user:str):
     for i in month_list:
         amount_sum += i.amount
     return amount_sum
+
+def get_transation(db: Session,limit:int,username:str):
+    transation_list = db.query(models.Outcome).filter(models.Outcome.user == username).order_by(models.Outcome.id.desc()).limit(limit).all()
+    return transation_list
+
+###############################################
 
 def get_day_outcome(db: Session, year: int, month: int, day: int,username:str):
     day_list = db.query(models.Outcome).filter(models.Outcome.year == year, models.Outcome.month == month, models.Outcome.day == day,models.Outcome.user == username).all()

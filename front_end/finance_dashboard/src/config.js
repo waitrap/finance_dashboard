@@ -7,4 +7,5 @@ export const config = {
     dayBalanceUrl: "/balance/day",
     monthIncomeListUrl: "/income/month_income_list",
     monthOutcomeListUrl: "/outcome/month_outcome_list",
+    getTransationrecord: "/outcome/transationrecord",
 }

@@ -28,3 +28,10 @@ async def get_month_outcome_list(request:Request, year:int, db: SessionLocal = D
         data = crud.get_month_outcome(db, year, month, request.state.username)
         month_outcome_list.append(data)
     return month_outcome_list
+
+@router.get("/outcome/transationrecord",tags=["outcome"])
+async def get_transation_record(request:Request,limit:int,db: SessionLocal = Depends(get_db)): # type: ignore
+    """
+    最新のlimit件のレコードを取得する
+    """
+    return crud.get_transation(db,limit,request.state.username)
