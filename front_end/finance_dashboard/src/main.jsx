@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './apps/login_page/login';
 import Root from './apps/root';
 import Dashboard from './apps/dashboard_page/dashboard';
+import InputPage from './apps/input_page/inputpage';
 
 // 設置ルティング
 const app = createBrowserRouter([
@@ -24,10 +25,10 @@ const app = createBrowserRouter([
       //   path:"record",
       //   element: <Record />
       // },
-      // {
-      //   path: "input",
-      //   element: <Input />,
-      // }
+      {
+        path: "input",
+        element: <InputPage />,
+      }
     ],
   }
 ]);

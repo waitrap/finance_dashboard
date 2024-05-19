@@ -15,7 +15,15 @@ export default function Root() {
     const sideLinks = ["/dashboard", "/record", "/input"];
     const sideIcons = ["dashboard", "insights", "edit_note"];
     
-    const [active, setActive] = useState(0);
+    const url = window.location;
+    const pathname = url.pathname; 
+    let nowLinksindex = 0;
+    for(let i=0;i<sideLinks.length;++i){
+        if (pathname===sideLinks[i]){
+            nowLinksindex = i;
+        }
+    }
+    const [active, setActive] = useState(nowLinksindex);
 
     const handLinkClick = (index) => {
         setActive(index);
