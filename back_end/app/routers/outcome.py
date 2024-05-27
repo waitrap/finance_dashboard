@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Request
 from ..database.db import SessionLocal
 from ..database import crud
+from ..models import schemas
 
 router = APIRouter()
 
@@ -35,3 +36,8 @@ async def get_transation_record(request:Request,limit:int,db: SessionLocal = Dep
     最新のlimit件のレコードを取得する
     """
     return crud.get_transation(db,limit,request.state.username)
+
+@router.post("/input/outcome",tags=["outcome"])
+async def input_outcome(request:Request,outcome_record:schemas.OutcomeCreate,db: SessionLocal = Depends(get_db)):  # type: ignore
+    
+    return crud.create_outcome_record(db,outcome_record,request.state.username)

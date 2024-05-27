@@ -35,7 +35,18 @@ export default function InputPage(){
                 amount: amountValue,
                 ...(inputKind==="outcome" && { category: categoryValue}),
                 description: noteValue
-            }),
+            })
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                alert('Submit failed');
+                throw new Error("input was wrong");
+            }
+        }).then((data)=>{
+            alert('Submit Success');
+        }).catch((error)=>{
+            console.error('There was a problem with the fetch operation:', error);
         })
     }
 

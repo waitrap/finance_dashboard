@@ -44,3 +44,7 @@ class Balance(Base):
     amount = Column(DECIMAL(10, 2))
 
     user= Column(String, ForeignKey("users.username"))
+
+    def __repr__(self):
+        return (f"<Balance(id={self.id}, year={self.year}, month={self.month}, "
+                f"day={self.day}, amount={self.amount}, user='{self.user}')>")
