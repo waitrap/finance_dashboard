@@ -12,7 +12,7 @@ export default function Root() {
     }
 
     const sideItems = ["Dashboard", "Record", "Input"];
-    const sideLinks = ["/dashboard", "/record", "/input"];
+    const sideLinks = ["/dashboard", "/record/outcome", "/input"];
     const sideIcons = ["dashboard", "insights", "edit_note"];
     
     const url = window.location;

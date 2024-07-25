@@ -1,0 +1,20 @@
+
+.record_container {
+    margin-top: 2rem;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 120vh;
+    gap: 3rem;
+}
+
+.button_container button{
+    background-color: #a18af4 ;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+}
+
+.button_container .choose{
+    background-color: #5222fd;
+}
